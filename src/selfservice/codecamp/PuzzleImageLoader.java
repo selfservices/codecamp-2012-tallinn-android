@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView.ScaleType;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -43,16 +44,19 @@ public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 		wm.getDefaultDisplay().getMetrics(metrics);
 
 		Log.e("1","Screensize: "+metrics.heightPixels+"X"+metrics.widthPixels);
-		Log.e("1","IMAGESIZE: "+result.length+"X"+result[0].length);
-		int imageHeight = (metrics.heightPixels-100) / result.length;
+		Log.e("1","IMAGES SIZE: "+result.length+"X"+result[0].length);
+		int imageHeight = (metrics.heightPixels-200) / result.length;
 		for (int i = 0; i < result.length; i++) {
 			int imageWidth = metrics.widthPixels / result[i].length;
+			Log.e("1","IMAGE SIZE: "+imageHeight+"X"+imageWidth);
+
 			TableRow row = new TableRow(context);
 			for (int j = 0; j < result[i].length; j++) {
 				ImageButton imageView = new ImageButton(context);
 				imageView.setAdjustViewBounds(true);
 				imageView.setMaxHeight(imageHeight);
 				imageView.setMaxWidth(imageWidth);
+				imageView.setScaleType(ScaleType.CENTER_CROP);
 				imageView.setPadding(0, 0, 0, 0);
 				Bitmap map = result[i][j];
 				imageView.setImageBitmap(map);
