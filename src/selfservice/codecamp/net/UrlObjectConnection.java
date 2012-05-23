@@ -19,15 +19,5 @@ public class UrlObjectConnection {
 		ObjectInputStream ois = new ObjectInputStream(this.conn.getInputStream());
 		return (T) ois.readObject();
 	}
-
-	public static void main(String... args) throws Exception {
-		Object[][] objects = new UrlObjectConnection("http://172.17.37.69:8080/task3/puzzle").getObject();
-		for (Object[] objectRow: objects) {
-			for (Object object: objectRow) {
-				byte[] bytes = (byte[]) object;
-				System.out.println(bytes.length);
-			}
-		}
-	}
 	
 }
