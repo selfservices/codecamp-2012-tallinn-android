@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -16,7 +17,10 @@ public class AndroidPuzzler extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         HorizontalScrollView scrollView = new HorizontalScrollView(this);
-
+        
+        ScrollView verticalScroller = new ScrollView(this);
+        scrollView.addView(verticalScroller);
+        
         TableLayout mainTable = new TableLayout(this);
         TableRow refreshRow = new TableRow(this);
         TableRow imagesRow = new TableRow(this);
@@ -26,7 +30,7 @@ public class AndroidPuzzler extends Activity {
         mainTable.addView(imagesRow);
         mainTable.addView(submitRow);
 
-        scrollView.addView(mainTable);
+        verticalScroller.addView(mainTable);
         TableLayout imagesTable = new TableLayout(this);
         imagesRow.addView(imagesTable);
         

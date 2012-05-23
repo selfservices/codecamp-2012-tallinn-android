@@ -1,5 +1,7 @@
 package selfservice.codecamp;
 
+import java.net.URLEncoder;
+
 import selfservice.codecamp.net.UrlGetSender.Header;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -29,7 +31,7 @@ public class SubmitButtonOnClickListener implements OnClickListener {
 			String answer = answerField.getText().toString();
 			try {
 				String o = new UrlGetSender(
-						"http://172.17.37.69:8080/task3/solution/" + answer,
+						"http://172.17.37.69:8080/task3/solution/" + URLEncoder.encode(answer,"UTF-8"),
 						new Header("teamId", "selfservice")).send();
 				Log.e("Answer",o);
 			} catch (Exception e) {
