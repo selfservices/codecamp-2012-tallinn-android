@@ -54,6 +54,7 @@ public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 				imageView.setAdjustViewBounds(true);
 				imageView.setMaxHeight(imageHeight);
 				imageView.setMaxWidth(imageWidth);
+				imageView.setPadding(0, 0, 0, 0);
 				//imageView.set
 				Bitmap map = result[i][j];
 				imageView.setImageBitmap(map);
