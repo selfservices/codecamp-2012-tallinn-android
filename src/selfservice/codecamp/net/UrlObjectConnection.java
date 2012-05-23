@@ -5,13 +5,18 @@ import java.io.ObjectInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import selfservice.codecamp.net.UrlGetSender.Header;
+
 public class UrlObjectConnection {
 
 	private URLConnection conn;
 	
-	public UrlObjectConnection(String url) throws IOException {
+	public UrlObjectConnection(String url,Header... headers) throws IOException {
 		URL urlObject = new URL(url);
 		this.conn = urlObject.openConnection();
+		for (Header header: headers) {
+			this.conn.setRequestProperty(header.getField(), header.getValue());
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -30,7 +30,7 @@ public class SubmitButtonOnClickListener implements OnClickListener {
 			try {
 				String o = new UrlGetSender(
 						"http://172.17.37.69:8080/task3/solution/" + answer,
-						new Header("teamId", "test")).send();
+						new Header("teamId", "selfservice")).send();
 				Log.e("Answer",o);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
