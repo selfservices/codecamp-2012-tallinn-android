@@ -8,6 +8,7 @@ import selfservice.codecamp.net.UrlObjectConnection;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -44,8 +45,10 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 		for(List<Bitmap> rowList: result.getContents()) {
 			TableRow row = new TableRow(context);
 			for(Bitmap image : rowList) {
-				ImageView imageView = new ImageView(context);
+				ImageButton imageView = new ImageButton(context);
 				imageView.setImageBitmap(image);
+				imageView.setMaxHeight(20);
+				imageView.setMaxWidth(20);
 				row.addView(imageView);
 			}
 			table.addView(row);

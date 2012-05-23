@@ -3,6 +3,7 @@ package selfservice.codecamp;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.HorizontalScrollView;
 import android.widget.TableLayout;
 
 public class AndroidPuzzler extends Activity {
@@ -13,9 +14,12 @@ public class AndroidPuzzler extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TableLayout table = new TableLayout(this);
         
-        setContentView(table);
+        HorizontalScrollView scrollView = new HorizontalScrollView(this);
+        TableLayout table = new TableLayout(this);
+        scrollView.addView(table);
+        
+        setContentView(scrollView);
         new PuzzleImageLoader(table,(Context)this).execute(IMAGE_GET_URL);
 
     }
