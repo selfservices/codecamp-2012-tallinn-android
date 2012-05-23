@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
-public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
+public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 
 	private TableLayout table;
 	private Context context;
@@ -23,37 +23,30 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 	}
 
 	@Override
-	protected ImageTable doInBackground(String... params) {
-		
-		ImageTable iTable = new ImageTable();
-
+	protected Bitmap[][] doInBackground(String... params) {
 		try {
 			Object[][] objects = new UrlObjectConnection(params[0]).getObject();
-			Bitmap[][] images = ImageUtils.toBitmapArray(objects);
-			for(Bitmap[] imageRow : images) {
-				iTable.addRow(Arrays.asList(imageRow));
-			}
+			return ImageUtils.toBitmapArray(objects);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return iTable;
 	}
 	
 	@Override
-	protected void onPostExecute(ImageTable result) {
+	protected void onPostExecute(Bitmap[][] result) {
 		super.onPostExecute(result);
 		drawImageTable(result,context,table);
 	}
 
-	public static void drawImageTable(ImageTable result, Context context, TableLayout table) {
-		for(List<Bitmap> rowList: result.getContents()) {
+	public static void drawImageTable(Bitmap[][] result, Context context, TableLayout table) {
+		for (int i = 0; i < result.length; i++) {
 			TableRow row = new TableRow(context);
-			for(Bitmap image : rowList) {
+			for (int j = 0; j < result[i].length; j++) {
 				ImageButton imageView = new ImageButton(context);
-				imageView.setImageBitmap(image);
+				imageView.setImageBitmap(result[i][j]);
 				imageView.setMaxHeight(20);
 				imageView.setMaxWidth(20);
-				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,image,table,context,imageView));
+				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,result[i][j],table,context,imageView,i,j));
 				row.addView(imageView);
 				
 			}

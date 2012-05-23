@@ -10,45 +10,53 @@ import android.widget.TableLayout;
 
 public class ImageButtonOnClickEvent implements OnClickListener {
 
-	private final ImageTable result; 
+	private final Bitmap[][] result; 
 	private final Bitmap image;
 	private final TableLayout table;
 	private final Context context;
 	private final ImageButton button;
+	private final int i;
+	private final int j;
 	
-	private static Bitmap selectedImageOne;
-	private static Bitmap selectedImageTwo;
-	
-	public ImageButtonOnClickEvent(ImageTable result, Bitmap image, TableLayout table, Context context,ImageButton button) {
+	private static int firstI = -1;
+	private static int firstJ = -1;
+
+	private static int secondI = -1;
+	private static int secondJ = -1;
+
+	public ImageButtonOnClickEvent(Bitmap[][] result, Bitmap image, TableLayout table, Context context,ImageButton button, int i, int j) {
 		this.result = result;
 		this.image = image;
 		this.table = table;
 		this.context = context;
 		this.button = button;
+		this.i = i;
+		this.j = j;
 	}
 
-	@Override
 	public void onClick(View v) {
 		button.setSelected(true);
 //		button.set
-		if(selectedImageOne == null) {
-			selectedImageOne = image;
+		if (firstI < 0) {
+			firstI = this.i;
+			firstJ = this.j;
 
 			Log.e("2","ONE NULL");
-		} else if(selectedImageTwo == null) {
-			selectedImageTwo = image;
-			Log.e("2","TWO NULL");
-
-		}
-		if(selectedImageTwo != null) {
+		} else if(secondI < 0) {
+			secondI = this.i;
+			secondJ = this.j;
 			Log.e("2","REDRAW");
-			//Swap images
+			Bitmap tmp = result[firstI][firstJ];
+			result[firstI][firstJ] = result[secondI][secondJ];
+			result[secondI][secondJ] = tmp;	
 			//redraw
 			table.removeAllViews();
 			PuzzleImageLoader.drawImageTable(result, context, table);
 			//Clear
-			selectedImageOne = null;
-			selectedImageOne = null;
+			firstI = -1;
+			firstJ = -1;
+			secondI = -1;
+			secondJ = -1;
 		}
 		
 		
