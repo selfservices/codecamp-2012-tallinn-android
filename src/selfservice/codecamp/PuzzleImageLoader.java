@@ -1,7 +1,11 @@
 package selfservice.codecamp;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import selfservice.codecamp.images.ImageUtils;
+import selfservice.codecamp.net.UrlObjectConnection;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,13 +26,19 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 
 	@Override
 	protected ImageTable doInBackground(String... params) {
+		
+		ImageTable iTable = new ImageTable();
+
 		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
+			Object[][] objects = new UrlObjectConnection("http://172.17.37.69:8080/task3/puzzle").getObject();
+			Bitmap[][] images = ImageUtils.toBitmapArray(objects);
+			for(Bitmap[] imageRow : images) {
+				iTable.addRow(Arrays.asList(imageRow));
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ImageTable iTable = new ImageTable();
 		//iTable.addRow(Arrays.asList("Laalaa","Paipai","hipsu"));
 		//iTable.addRow(Arrays.asList("Teletapit","muumit","foobaarit"));
 		return iTable;
