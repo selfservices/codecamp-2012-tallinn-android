@@ -3,13 +3,15 @@ package selfservice.codecamp;
 import java.util.Arrays;
 import java.util.List;
 
+import selfservice.codecamp.images.ImageUtils;
+import selfservice.codecamp.net.UrlObjectConnection;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 
 public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 
@@ -22,15 +24,18 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 
 	@Override
 	protected ImageTable doInBackground(String... params) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		ImageTable iTable = new ImageTable();
-		//iTable.addRow(Arrays.asList("Laalaa","Paipai","hipsu"));
-		//iTable.addRow(Arrays.asList("Teletapit","muumit","foobaarit"));
+
+		try {
+			Object[][] objects = new UrlObjectConnection(params[0]).getObject();
+			Bitmap[][] images = ImageUtils.toBitmapArray(objects);
+			for(Bitmap[] imageRow : images) {
+				iTable.addRow(Arrays.asList(imageRow));
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		return iTable;
 	}
 	
@@ -40,8 +45,10 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 		for(List<Bitmap> rowList: result.getContents()) {
 			TableRow row = new TableRow(context);
 			for(Bitmap image : rowList) {
-				ImageView imageView = new ImageView(context);
+				ImageButton imageView = new ImageButton(context);
 				imageView.setImageBitmap(image);
+				imageView.setMaxHeight(20);
+				imageView.setMaxWidth(20);
 				row.addView(imageView);
 			}
 			table.addView(row);
