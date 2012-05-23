@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import selfservice.codecamp.net.UrlGetSender.Header;
 
 public class UrlObjectConnection {
 

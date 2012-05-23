@@ -1,7 +1,6 @@
 package selfservice.codecamp;
 
 import selfservice.codecamp.images.ImageUtils;
-import selfservice.codecamp.net.UrlGetSender.Header;
 import selfservice.codecamp.net.UrlObjectConnection;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,7 +21,7 @@ public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 	@Override
 	protected Bitmap[][] doInBackground(String... params) {
 		try {
-			Object[][] objects = new UrlObjectConnection(params[0], new Header("teamId","selfservice")).getObject();
+			Object[][] objects = new UrlObjectConnection(Constants.IMAGE_GET_URL, Constants.SELFSERVICE_HEADER).getObject();
 			return ImageUtils.toBitmapArray(objects);
 		} catch (Exception e) {
 			throw new RuntimeException(e);

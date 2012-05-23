@@ -15,7 +15,7 @@ public class PuzzleRefresher implements OnClickListener {
 	}
 	public void onClick(View v) {
 		table.removeAllViews();
-        new PuzzleImageLoader(table, context).execute(Constants.IMAGE_GET_URL);
+        new PuzzleImageLoader(table, context).execute();
 
 	}
 

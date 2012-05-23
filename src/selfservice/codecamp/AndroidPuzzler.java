@@ -22,11 +22,14 @@ public class AndroidPuzzler extends Activity {
         scrollView.addView(verticalScroller);
         
         TableLayout mainTable = new TableLayout(this);
+        
         TableRow refreshRow = new TableRow(this);
+
         TableRow imagesRow = new TableRow(this);
         TableRow submitRow = new TableRow(this);
         initSubmitRow(submitRow);
         mainTable.addView(refreshRow);
+       
         mainTable.addView(imagesRow);
         mainTable.addView(submitRow);
 
@@ -34,7 +37,7 @@ public class AndroidPuzzler extends Activity {
         TableLayout imagesTable = new TableLayout(this);
         imagesRow.addView(imagesTable);
         
-        new PuzzleImageLoader(imagesTable,(Context)this).execute(Constants.IMAGE_GET_URL);
+        new PuzzleImageLoader(imagesTable,(Context)this).execute();
         Button refreshButton = new Button(this);
         refreshButton.setText("Refresh");
         refreshButton.setOnClickListener(new PuzzleRefresher(imagesTable,(Context)this));
