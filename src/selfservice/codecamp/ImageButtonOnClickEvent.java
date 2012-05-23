@@ -11,7 +11,6 @@ import android.widget.TableLayout;
 public class ImageButtonOnClickEvent implements OnClickListener {
 
 	private final Bitmap[][] result; 
-	private final Bitmap image;
 	private final TableLayout table;
 	private final Context context;
 	private final ImageButton button;
@@ -24,9 +23,8 @@ public class ImageButtonOnClickEvent implements OnClickListener {
 	private static int secondI = -1;
 	private static int secondJ = -1;
 
-	public ImageButtonOnClickEvent(Bitmap[][] result, Bitmap image, TableLayout table, Context context,ImageButton button, int i, int j) {
+	public ImageButtonOnClickEvent(Bitmap[][] result, TableLayout table, Context context,ImageButton button, int i, int j) {
 		this.result = result;
-		this.image = image;
 		this.table = table;
 		this.context = context;
 		this.button = button;

@@ -30,7 +30,7 @@ public class SubmitButtonOnClickListener implements OnClickListener {
 			String answer = answerField.getText().toString();
 			try {
 				String o = new UrlGetSender(
-						"http://172.17.37.69:8080/task3/solution/" + URLEncoder.encode(answer,"UTF-8"),
+						 Constants.IMAGE_ANSWER_URL+ URLEncoder.encode(answer,"UTF-8"),
 						Constants.SELFSERVICE_HEADER).send();
 				Log.e("Answer",o);
 			} catch (Exception e) {

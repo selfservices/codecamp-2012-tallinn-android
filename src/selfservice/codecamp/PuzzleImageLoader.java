@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -55,10 +54,9 @@ public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 				imageView.setMaxHeight(imageHeight);
 				imageView.setMaxWidth(imageWidth);
 				imageView.setPadding(0, 0, 0, 0);
-				//imageView.set
 				Bitmap map = result[i][j];
 				imageView.setImageBitmap(map);
-				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,result[i][j],table,context,imageView,i,j));
+				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,table,context,imageView,i,j));
 				row.addView(imageView);
 				
 			}
