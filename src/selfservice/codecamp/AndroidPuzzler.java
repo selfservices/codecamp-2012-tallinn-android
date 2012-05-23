@@ -14,8 +14,7 @@ public class AndroidPuzzler extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TableLayout table = new TableLayout(this);
-        table.setStretchAllColumns(true);  
-        table.setShrinkAllColumns(true);  
+        
         setContentView(table);
         new PuzzleImageLoader(table,(Context)this).execute(IMAGE_GET_URL);
 
