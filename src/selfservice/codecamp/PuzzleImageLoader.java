@@ -42,6 +42,10 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 	@Override
 	protected void onPostExecute(ImageTable result) {
 		super.onPostExecute(result);
+		drawImageTable(result,context,table);
+	}
+
+	public static void drawImageTable(ImageTable result, Context context, TableLayout table) {
 		for(List<Bitmap> rowList: result.getContents()) {
 			TableRow row = new TableRow(context);
 			for(Bitmap image : rowList) {
@@ -49,7 +53,9 @@ public class PuzzleImageLoader extends AsyncTask<String,Void,ImageTable> {
 				imageView.setImageBitmap(image);
 				imageView.setMaxHeight(20);
 				imageView.setMaxWidth(20);
+				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,image,table,context,imageView));
 				row.addView(imageView);
+				
 			}
 			table.addView(row);
 		}
