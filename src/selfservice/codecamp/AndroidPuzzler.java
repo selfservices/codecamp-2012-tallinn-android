@@ -3,6 +3,8 @@ package selfservice.codecamp;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -10,8 +12,6 @@ import android.widget.TableRow;
 public class AndroidPuzzler extends Activity {
     /** Called when the activity is first created. */
     
-	private final static String IMAGE_GET_URL = "http://172.17.37.69:8080/task3/puzzle";
-	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +24,19 @@ public class AndroidPuzzler extends Activity {
         mainTable.addView(imagesRow);
         mainTable.addView(submitRow);
 
+
         HorizontalScrollView scrollView = new HorizontalScrollView(this);
         imagesRow.addView(scrollView);
         TableLayout table = new TableLayout(this);
         scrollView.addView(table);
         
         setContentView(mainTable);
-        new PuzzleImageLoader(table,(Context)this).execute(IMAGE_GET_URL);
+        new PuzzleImageLoader(table,(Context)this).execute(Constants.IMAGE_GET_URL);
+        Button refreshButton = new Button(this);
+        refreshButton.setText("Refresh");
+        refreshButton.setOnClickListener(new PuzzleRefresher(table,(Context)this));
+        refreshRow.addView(refreshButton);
+        
 
     }
 }

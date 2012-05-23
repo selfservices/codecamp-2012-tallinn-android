@@ -1,15 +1,11 @@
 package selfservice.codecamp;
 
-import java.util.Arrays;
-import java.util.List;
-
 import selfservice.codecamp.images.ImageUtils;
 import selfservice.codecamp.net.UrlObjectConnection;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
