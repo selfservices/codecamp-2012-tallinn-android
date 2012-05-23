@@ -12,8 +12,6 @@ import android.widget.TableRow;
 public class AndroidPuzzler extends Activity {
     /** Called when the activity is first created. */
     
-	private final static String IMAGE_GET_URL = "http://172.17.37.69:8080/task3/puzzle";
-	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +30,13 @@ public class AndroidPuzzler extends Activity {
         TableLayout imagesTable = new TableLayout(this);
         imagesRow.addView(imagesTable);
         
+        new PuzzleImageLoader(imagesTable,(Context)this).execute(Constants.IMAGE_GET_URL);
+        Button refreshButton = new Button(this);
+        refreshButton.setText("Refresh");
+        refreshButton.setOnClickListener(new PuzzleRefresher(imagesTable,(Context)this));
+        refreshRow.addView(refreshButton);
         setContentView(scrollView);
-        new PuzzleImageLoader(imagesTable,(Context)this).execute(IMAGE_GET_URL);
+        
     }
 	
 	public void initSubmitRow(TableRow submitRow) {
