@@ -2,7 +2,9 @@ package selfservice.codecamp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -16,6 +18,7 @@ public class AndroidPuzzler extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         HorizontalScrollView scrollView = new HorizontalScrollView(this);
         
         ScrollView verticalScroller = new ScrollView(this);
@@ -26,11 +29,13 @@ public class AndroidPuzzler extends Activity {
         TableRow refreshRow = new TableRow(this);
 
         TableRow imagesRow = new TableRow(this);
+        TableRow answerRow = new TableRow(this);
         TableRow submitRow = new TableRow(this);
-        initSubmitRow(submitRow);
+        initSubmitRow(submitRow,answerRow);
         mainTable.addView(refreshRow);
        
         mainTable.addView(imagesRow);
+        mainTable.addView(answerRow);
         mainTable.addView(submitRow);
 
         verticalScroller.addView(mainTable);
@@ -46,12 +51,12 @@ public class AndroidPuzzler extends Activity {
         
     }
 	
-	public void initSubmitRow(TableRow submitRow) {
+	public void initSubmitRow(TableRow submitRow,TableRow answerRow) {
 		EditText answerField = new EditText(this);
 		Button answerSubmitButton = new Button(this);
 		answerSubmitButton.setText("Answer");
 		answerSubmitButton.setOnClickListener(new SubmitButtonOnClickListener(answerField));
-		submitRow.addView(answerField);
+		answerRow.addView(answerField);
 		submitRow.addView(answerSubmitButton);
 	}
 }

@@ -5,6 +5,10 @@ import selfservice.codecamp.net.UrlObjectConnection;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,13 +39,24 @@ public class PuzzleImageLoader extends AsyncTask<String,Void, Bitmap[][]> {
 	}
 
 	public static void drawImageTable(Bitmap[][] result, Context context, TableLayout table) {
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics metrics = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(metrics);
+
+		Log.e("1","Screensize: "+metrics.heightPixels+"X"+metrics.widthPixels);
+		Log.e("1","IMAGESIZE: "+result.length+"X"+result[0].length);
+		int imageHeight = (metrics.heightPixels-100) / result.length;
 		for (int i = 0; i < result.length; i++) {
+			int imageWidth = metrics.widthPixels / result[i].length;
 			TableRow row = new TableRow(context);
 			for (int j = 0; j < result[i].length; j++) {
 				ImageButton imageView = new ImageButton(context);
-				imageView.setImageBitmap(result[i][j]);
-				imageView.setMaxHeight(20);
-				imageView.setMaxWidth(20);
+				imageView.setAdjustViewBounds(true);
+				imageView.setMaxHeight(imageHeight);
+				imageView.setMaxWidth(imageWidth);
+				//imageView.set
+				Bitmap map = result[i][j];
+				imageView.setImageBitmap(map);
 				imageView.setOnClickListener(new ImageButtonOnClickEvent(result,result[i][j],table,context,imageView,i,j));
 				row.addView(imageView);
 				
