@@ -2,6 +2,7 @@
 .settings
 .project
 .classpath
+hs_err_pid*.log
 
 # built application files
 *.apk
